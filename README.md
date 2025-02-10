@@ -24,4 +24,5 @@ function Dashboard() {
       <Main />
     </div>
   );
-}```
+}
+```
