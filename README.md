@@ -1,1 +1,1 @@
-# React-Tips-Tricks
+# React-Tips-Tricks by **Ndeye Fatou Diop**
