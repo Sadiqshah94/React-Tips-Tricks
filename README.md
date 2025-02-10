@@ -13,10 +13,10 @@
 
 ```
 
-2. Prefer fragments over DOM nodes (e.g., div, span, etc.) to group elements
+### 2. Prefer fragments over DOM nodes (e.g., div, span, etc.) to group elements
 
 ```
-❌ Bad: Using div clutters your DOM and may require more CSS code.
+//❌ Bad: Using div clutters your DOM and may require more CSS code.
 
 function Dashboard() {
   return (
@@ -24,6 +24,17 @@ function Dashboard() {
       <Header />
       <Main />
     </div>
+  );
+}
+
+//✅ Good: <Fragment> wraps elements without affecting the DOM structure.
+
+function Dashboard() {
+  return (
+    <Fragment>
+      <Header />
+      <Main />
+    </Fragment>
   );
 }
 ```
