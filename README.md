@@ -164,3 +164,85 @@ function Button({
 // ✅ Good
 <Button text="Click me" colorScheme="dark" />
 ````
+
+### 7. Ensure that value is a boolean before using value && <Component {...props}/> to prevent displaying unexpected values on the screen.
+````
+❌ Bad: When the list is empty, 0 will be printed on the screen.
+
+export function ListWrapper({ items, selectedItem, setSelectedItem }) {
+  return (
+    <div className="list">
+      {items.length && ( // `0` if the list is empty
+        <List
+          items={items}
+          onSelectItem={setSelectedItem}
+          selectedItem={selectedItem}
+        />
+      )}
+    </div>
+  );
+}
+
+✅ Good: Nothing will be printed on the screen when there are no items.
+
+export function ListWrapper({ items, selectedItem, setSelectedItem }) {
+  return (
+    <div className="list">
+      {items.length > 0 && (
+        <List
+          items={items}
+          onSelectItem={setSelectedItem}
+          selectedItem={selectedItem}
+        />
+      )}
+    </div>
+  );
+}
+````
+
+8. Use functions (inline or not) to avoid polluting your scope with intermediate variables
+
+````
+❌ Bad: The variables gradeSum and gradeCount are cluttering the component's scope.
+
+function Grade({ grades }) {
+  if (grades.length === 0) {
+    return <>No grades available.</>;
+  }
+
+  let gradeSum = 0;
+  let gradeCount = 0;
+
+  grades.forEach((grade) => {
+    gradeCount++;
+    gradeSum += grade;
+  });
+
+  const averageGrade = gradeSum / gradeCount;
+
+  return <>Average Grade: {averageGrade}</>;
+}
+
+✅ Good: The variables gradeSum and gradeCountare scoped within computeAverageGrade function.
+
+function Grade({ grades }) {
+  if (grades.length === 0) {
+    return <>No grades available.</>;
+  }
+
+  const computeAverageGrade = () => {
+    let gradeSum = 0;
+    let gradeCount = 0;
+    grades.forEach((grade) => {
+      gradeCount++;
+      gradeSum += grade;
+    });
+    return gradeSum / gradeCount;
+  };
+
+  return <>Average Grade: {computeAverageGrade()}</>;
+}
+````
+
+
+
