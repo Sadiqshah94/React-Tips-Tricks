@@ -154,3 +154,13 @@ function Button({
   );
 }
 ````
+
+
+### 6. Drop curly braces when passing string type props.
+````
+// ❌ Bad: curly braces are not needed
+<Button text={"Click me"} colorScheme={"dark"} />
+
+// ✅ Good
+<Button text="Click me" colorScheme="dark" />
+````
